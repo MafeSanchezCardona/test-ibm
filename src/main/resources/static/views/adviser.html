@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html >
+<head>
+    <meta charset="UTF-8">
+    <title>Test IBM</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.7/angular.js"></script>
+</head>
+<body>
+<div class="container" ng-app="testIbm2" ng-controller="CustomerController">
+    <div id="menu" style="margin: 30px;">
+        <ul class="nav nav-pills nav-fill">
+            <li class="nav-item">
+                <a class="nav-link" href="/">Lista de Clientes</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="#">Lista de Asesores</a>
+            </li>
+        </ul>
+    </div>
+    <div class="row">
+        <label>Nombre:</label>
+        <input type="text" ng-model="customerDto.name" class="input-sm spacing"/>
+
+        <button ng-click="save()" class="btn btn-sm btn-info">Guardar Asesor</button>
+    </div>
+    <hr/>
+    <div class="row">
+        <p>{{allCustomer | json}}</p>
+    </div>
+    <hr/>
+    <div class="row" ng-repeat="customer in allCustomer">
+        <div class="">
+            <h3>{{customer.name}}</h3>
+        </div>
+    </div>
+</div>
+
+</body>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="../js/app.js"></script>
+<script src="../js/customer.js"></script>
+</html>

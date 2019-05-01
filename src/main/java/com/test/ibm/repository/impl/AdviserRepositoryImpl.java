@@ -4,11 +4,11 @@ import com.test.ibm.entity.Adviser;
 import com.test.ibm.repository.AdviserRepository;
 import com.test.ibm.utility.HibernateUtility;
 import org.hibernate.Session;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@Repository
+@Component
 public class AdviserRepositoryImpl implements AdviserRepository {
     @Override
     public void save(Adviser adviser) {

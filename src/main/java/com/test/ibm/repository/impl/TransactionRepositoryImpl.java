@@ -4,11 +4,12 @@ import com.test.ibm.entity.Transaction;
 import com.test.ibm.repository.TransactionRepository;
 import com.test.ibm.utility.HibernateUtility;
 import org.hibernate.Session;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
+@Component
 public class TransactionRepositoryImpl implements TransactionRepository {
     @Override
     public void save(Transaction transaction) {

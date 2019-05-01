@@ -3,6 +3,8 @@ package com.test.ibm.controller;
 import com.test.ibm.dto.CustomerDto;
 import com.test.ibm.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,22 +20,25 @@ public class CustomerController {
     private CustomerService customerService;
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public void save(@RequestBody CustomerDto customerDto) {
+    public ResponseEntity<String> save(@RequestBody CustomerDto customerDto) {
         customerService.save(customerDto);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public void update(@RequestBody CustomerDto customerDto) {
+    public ResponseEntity<String> update(@RequestBody CustomerDto customerDto) {
         customerService.update(customerDto);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
-    public void delete(@RequestBody CustomerDto customerDto) {
+    public ResponseEntity<String> delete(@RequestBody CustomerDto customerDto) {
         customerService.delete(customerDto);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @RequestMapping(value = "/list")
-    public List<CustomerDto> list() {
-        return customerService.list();
+    public ResponseEntity<List<CustomerDto>> list() {
+        return new ResponseEntity<>(customerService.list(), HttpStatus.OK);
     }
 }

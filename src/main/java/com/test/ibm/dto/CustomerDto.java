@@ -1,6 +1,10 @@
 package com.test.ibm.dto;
 
-public class CustomerDto {
+import java.io.Serializable;
+
+public class CustomerDto implements Serializable {
+
+    private static final long serialVersionUID = 3638084829475572651L;
 
     private Long identification;
     private String name;

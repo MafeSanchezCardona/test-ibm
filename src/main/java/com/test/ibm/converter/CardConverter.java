@@ -14,7 +14,7 @@ public class CardConverter {
         card.setNumber(cardDto.getNumber());
         card.setCcv(cardDto.getCcv());
         card.setType(cardDto.getType());
-        card.setIdentificationCustomer(cardDto.getIdentificationCustomer());
+        card.setCustomerIdentification(cardDto.getCustomerIdentification());
         return card;
     }
 
@@ -27,7 +27,7 @@ public class CardConverter {
             cardDto.setNumber(card.getNumber());
             cardDto.setCcv(card.getCcv());
             cardDto.setType(card.getType());
-            cardDto.setIdentificationCustomer(card.getIdentificationCustomer());
+            cardDto.setCustomerIdentification(card.getCustomerIdentification());
             cardDtoList.add(cardDto);
         }
 

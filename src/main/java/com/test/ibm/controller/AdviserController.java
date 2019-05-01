@@ -16,6 +16,11 @@ public class AdviserController {
     @Autowired
     private AdviserService adviserService;
 
+    @RequestMapping("/page")
+    public String adviser() {
+        return "adviser";
+    }
+
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public void save(@RequestBody AdviserDto adviserDto) {
         adviserService.save(adviserDto);

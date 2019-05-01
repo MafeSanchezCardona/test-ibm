@@ -4,11 +4,12 @@ import com.test.ibm.entity.Card;
 import com.test.ibm.repository.CardRepository;
 import com.test.ibm.utility.HibernateUtility;
 import org.hibernate.Session;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
+@Component
 public class CardRepositoryImpl implements CardRepository {
     @Override
     public void save(Card card) {
