@@ -12,7 +12,6 @@
         <property name="hibernate.connection.password"></property>
         <property name="hibernate.connection.url">jdbc:hsqldb:mem:test-ibm</property>
         <property name="hibernate.hbm2ddl.auto">create</property>
-        <mapping class="com.test.ibm.entity.EmployeeEntity"></mapping>
         <mapping class="com.test.ibm.entity.Adviser"></mapping>
         <mapping class="com.test.ibm.entity.Card"></mapping>
         <mapping class="com.test.ibm.entity.Customer"></mapping>
