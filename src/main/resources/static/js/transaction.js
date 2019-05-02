@@ -28,6 +28,8 @@ app.controller("transaction", function($scope, $http) {
 
     $scope.save = function() {
 
+        $scope.textError = "";
+
         var url = '/transaction/save';
 
         if ($scope.transactionUpdate === 1) {
@@ -36,6 +38,11 @@ app.controller("transaction", function($scope, $http) {
 
         $scope.transactionDto.cardNumber = $scope.selectedCardNumber;
         $scope.transactionDto.date = $scope.date.value;
+
+        if(validations($scope.transactionDto)) {
+            $scope.textError = "Por favor ingrese de manera correcta los datos";
+            return false;
+        }
 
         $http({
             method: "POST",
@@ -86,6 +93,7 @@ app.controller("transaction", function($scope, $http) {
         $scope.date = {
             value: transaction.date
         };
+        $scope.textError = "";
     };
 
     function refreshTransactionData(customerId) {
@@ -123,6 +131,8 @@ app.controller("transaction", function($scope, $http) {
             value: new Date()
         };
 
+        $scope.textError = "";
+
     };
 
     function getCards(customerId) {
@@ -135,5 +145,19 @@ app.controller("transaction", function($scope, $http) {
                 $scope.allCardByCustomer = allCard.data;
             }, error
         );
-    }
+    };
+
+    function validations(transaction) {
+
+        var number = /^([0-9])*$/;
+        var letters = /^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/;
+
+        if (!number.test(transaction.amount)) {
+            return true;
+        }
+
+        if (!letters.test(transaction.description)) {
+            return true;
+        }
+    };
 });

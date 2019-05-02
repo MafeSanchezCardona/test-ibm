@@ -14,10 +14,17 @@ app.controller("customer", function($scope, $http) {
 
     $scope.save = function() {
 
+        $scope.textError = "";
+
         var url = '/customer/save';
 
         if ($scope.customerUpdate === 1) {
             url = '/customer/update';
+        }
+
+        if(validations($scope.customerDto)) {
+            $scope.textError = "Por favor ingrese de manera correcta los datos";
+            return false;
         }
 
         $http({
@@ -60,6 +67,7 @@ app.controller("customer", function($scope, $http) {
         $scope.customerDto.city = customer.city;
         $scope.customerDto.telephone = customer.telephone;
         $scope.customerUpdate = 1;
+        $scope.textError = "";
     };
 
     function refreshCustomerData() {
@@ -92,6 +100,7 @@ app.controller("customer", function($scope, $http) {
         $scope.customerDto.city = "";
         $scope.customerDto.telephone = "";
         $scope.customerUpdate = 0;
+        $scope.textError = "";
 
     };
 
@@ -104,4 +113,23 @@ app.controller("customer", function($scope, $http) {
         var url = '/transaction/load?customerId =' + customer.identification + '&customerName =' + customer.name;
         window.open(url, "_blank");
     };
+
+    function validations(customer) {
+
+        var number = /^([0-9])*$/;
+        var letters = /^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/;
+
+        if (!number.test(customer.identification)) {
+            return true;
+        }
+
+        if (!number.test(customer.telephone)) {
+            return true;
+        }
+
+        if (!letters.test(customer.name)) {
+            return true;
+        }
+    };
+
 });

@@ -14,6 +14,14 @@ app.controller("adviser", function($scope, $http) {
 
     $scope.save = function() {
 
+        $scope.textError = "";
+
+        if(validations($scope.adviserDto)) {
+            $scope.textError = "Por favor ingrese de manera correcta los datos";
+            return false;
+        }
+
+
         var url = '/adviser/save';
 
         if ($scope.adviserUpdate === 1) {
@@ -54,6 +62,7 @@ app.controller("adviser", function($scope, $http) {
         $scope.adviserDto.name = adviser.name;
         $scope.adviserDto.specialty = adviser.specialty;
         $scope.adviserUpdate = 1;
+        $scope.textError = "";
     };
 
     function refreshAdviserData() {
@@ -83,6 +92,21 @@ app.controller("adviser", function($scope, $http) {
         $scope.adviserDto.identification ="";
         $scope.adviserDto.name = "";
         $scope.adviserDto.specialty = "";
+        $scope.textError = "";
 
+    };
+
+    function validations(adviser) {
+
+        var number = /^([0-9])*$/;
+        var letters = /^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/;
+
+        if (!number.test(adviser.identification)) {
+            return true;
+        }
+
+        if (!letters.test(adviser.name)) {
+            return true;
+        }
     };
 });

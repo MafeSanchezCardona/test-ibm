@@ -26,6 +26,8 @@ app.controller("card", function($scope, $http) {
 
     $scope.save = function() {
 
+        $scope.textError = "";
+
         var url = '/card/save';
 
         if ($scope.cardUpdate === 1) {
@@ -33,6 +35,11 @@ app.controller("card", function($scope, $http) {
         }
 
         $scope.cardDto.number = $scope.number4 + "" + $scope.number8 + "" + $scope.number12 + "" + $scope.number16;
+
+        if(validations($scope.cardDto)) {
+            $scope.textError = "Por favor ingrese de manera correcta los datos";
+            return false;
+        }
 
         $http({
             method: "POST",
@@ -68,13 +75,14 @@ app.controller("card", function($scope, $http) {
 
     $scope.edit = function(card) {
 
-        $scope.number4 = "";
-        $scope.number8 = "";
-        $scope.number12 = "";
-        $scope.number16 = "";
+        $scope.number4 = card.number.substring(3);
+        $scope.number8 = card.number.substring(7);
+        $scope.number12 = card.number.substring(11);
+        $scope.number16 = card.number.substring(15);
         $scope.cardDto.ccv = card.ccv;
         $scope.cardDto.type = card.type;
         $scope.cardUpdate = 1;
+        $scope.textError = "";
     };
 
     function refreshCardData(customerId) {
@@ -111,5 +119,25 @@ app.controller("card", function($scope, $http) {
         $scope.number12 = "";
         $scope.number16 = "";
 
+        $scope.textError = "";
+
+    };
+
+    function validations(card) {
+
+        var number = /^([0-9])*$/;
+        var letters = /^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/;
+
+        if (!number.test(card.number)) {
+            return true;
+        }
+
+        if (!number.test(card.ccv)) {
+            return true;
+        }
+
+        if (!letters.test(card.type)) {
+            return true;
+        }
     };
 });
