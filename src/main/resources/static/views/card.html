@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html >
+<head>
+    <meta charset="UTF-8">
+    <title>Test IBM</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.7/angular.js"></script>
+</head>
+<body>
+<div class="container" ng-app="cardModule" ng-controller="card">
+    <div class="row" style="margin-top: 30px;">
+        <h5>Tarjetas Asociadas al Cliente: &nbsp;</h5>
+        <label>{{customerName}}</label>
+    </div>
+    <div class="row">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Número de Tarjeta</span>
+            </div>
+            <input type="text" ng-model="number4" maxlength="4" class="form-control" required>
+            <input type="text" ng-model="number8" maxlength="4" class="form-control" required>
+            <input type="text" ng-model="number12" maxlength="4" class="form-control" required>
+            <input type="text" ng-model="number16" maxlength="4" class="form-control" required>
+        </div>
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" maxlength="4" ng-model="cardDto.ccv" placeholder="CCV" aria-label="CCV" aria-describedby="button-addon2" required>
+        </div>
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" maxlength="50" ng-model="cardDto.type" placeholder="Tipo de Tarjeta" aria-label="Tipo de Tarjeta" aria-describedby="button-addon2" required>
+        </div>
+        <div class="input-group mb-3">
+            <button ng-click="save()" class="btn btn-sm btn-info">Guardar Tarjeta</button>
+        </div>
+        <!--<div id="text-error" class="alert alert-danger" role="alert" ng-disabled="textError !== '' ">{{textError}}</div>-->
+    </div>
+    <div class="row">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th scope="col">Número de Tarjeta</th>
+                <th scope="col">CCV</th>
+                <th scope="col">Tipo de Tarjeta</th>
+                <th scope="col">Opciones</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="card in allCard">
+                <th scope="row">{{card.number}}</th>
+                <td>{{card.ccv}}</td>
+                <td>{{card.type}}</td>
+                <td>
+                    <div class="input-group mb-3">
+                        <button ng-click="edit(card)" class="btn btn-sm btn-info">Editar</button>&nbsp;&nbsp;
+                        <button ng-click="delete(card)" class="btn btn-sm btn-info">Eliminar</button>
+                    </div>
+                </td>
+            </tr>
+
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="../js/app.js"></script>
+<script src="../js/card.js"></script>
+</html>

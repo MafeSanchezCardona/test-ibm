@@ -2,16 +2,16 @@ package com.test.ibm.dto;
 
 public class CardDto {
 
-    private Integer number;
+    private Long number;
     private Integer ccv;
     private String type;
     private Long customerIdentification;
 
-    public Integer getNumber() {
+    public Long getNumber() {
         return number;
     }
 
-    public void setNumber(Integer number) {
+    public void setNumber(Long number) {
         this.number = number;
     }
 

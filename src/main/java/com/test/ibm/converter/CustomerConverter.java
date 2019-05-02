@@ -29,6 +29,7 @@ public class CustomerConverter {
             customerDto.setAddress(customer.getAddress());
             customerDto.setCity(customer.getCity());
             customerDto.setTelephone(customer.getTelephone());
+            customerDto.setCardNumbers(customer.getCardNumbers());
             customerDtoList.add(customerDto);
         }
 

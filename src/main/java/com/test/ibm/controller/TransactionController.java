@@ -17,6 +17,11 @@ public class TransactionController {
     @Autowired
     private TransactionService transactionService;
 
+    @RequestMapping("/load")
+    public String load() {
+        return "transaction";
+    }
+
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public void save(@RequestBody TransactionDto transactionDto) {
         transactionService.save(transactionDto);

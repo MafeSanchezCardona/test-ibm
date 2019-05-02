@@ -1,33 +1,27 @@
 'use strict'
 
-var app = angular.module("testIbm", []);
+var app = angular.module("customerModule", []);
 
-// Controller Part
 app.controller("customer", function($scope, $http) {
 
     $scope.customerDto = [];
-    $scope.customerForm = {
-        identification: "",
-        name: "",
-        addres: "",
-        city: "",
-        telephone: ""
-    };
+
+    $scope.customerUpdate = 0;
+
+    $scope.textError = "";
 
     refreshCustomerData();
 
-
     $scope.save = function() {
-        var method = "";
-        var url = "";
 
-        method = "POST";
-        url = '/customer/save';
+        var url = '/customer/save';
 
-
+        if ($scope.customerUpdate === 1) {
+            url = '/customer/update';
+        }
 
         $http({
-            method: method,
+            method: "POST",
             url: url,
             data: {
                 identification: $scope.customerDto.identification,
@@ -40,22 +34,32 @@ app.controller("customer", function($scope, $http) {
                 'Content-Type': 'application/json'
             }
         }).then(success, error);
-
-    }
-
-    // HTTP DELETE- delete employee by Id
-    // Call: http://localhost:8080/employee/{empId}
-    $scope.deleteEmployee = function(employee) {
-        $http({
-            method: 'DELETE',
-            url: '/employee/' + employee.empId
-        }).then(_success, _error);
     };
 
-    $scope.editCustomer = function(employee) {
-        $scope.customerDto.identification = employee.identification;
-        $scope.customerDto.name = employee.name;
-        $scope.customerDto.address = employee.address;
+    $scope.delete = function(customer) {
+        $http({
+            method: "POST",
+            url: '/customer/delete',
+            data: {
+                identification: customer.identification,
+                name: customer.name,
+                address: customer.address,
+                city: customer.city,
+                telephone: customer.telephone
+            },
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(success, error);
+    };
+
+    $scope.edit = function(customer) {
+        $scope.customerDto.identification = customer.identification;
+        $scope.customerDto.name = customer.name;
+        $scope.customerDto.address = customer.address;
+        $scope.customerDto.city = customer.city;
+        $scope.customerDto.telephone = customer.telephone;
+        $scope.customerUpdate = 1;
     };
 
     function refreshCustomerData() {
@@ -63,17 +67,13 @@ app.controller("customer", function($scope, $http) {
             method: 'GET',
             url: '/customer/list'
         }).then(
-            function(res) { // success
-                $scope.customerDto = res.data;
-                $scope.allCustomer = res.data;
-            },
-            function(res) { // error
-                console.log("Error: " + res.status + " : " + res.data);
-            }
+            function(allCustomer) {
+                $scope.allCustomer = allCustomer.data;
+            }, error
         );
     }
 
-    function success(res) {
+    function success() {
         refreshCustomerData();
         clearFormData();
     }
@@ -81,16 +81,27 @@ app.controller("customer", function($scope, $http) {
     function error(res) {
         var data = res.data;
         var status = res.status;
-        alert("Error: " + status + ":" + data);
+        //alert("Error: " + status + ":" + data);
+        $scope.textError = "Ocurrio un error " + data;
     }
 
-    // Clear the form
     function clearFormData() {
-        $scope.customerForm.identification="";
-        $scope.customerForm.name= "";
-        $scope.customerForm.addres= "";
-        $scope.customerForm.city= "";
-        $scope.customerForm.telephone= "";
+        $scope.customerDto.identification ="";
+        $scope.customerDto.name = "";
+        $scope.customerDto.address = "";
+        $scope.customerDto.city = "";
+        $scope.customerDto.telephone = "";
+        $scope.customerUpdate = 0;
 
+    };
+
+    $scope.getCards = function(customer) {
+        var url = '/card/load?customerId =' + customer.identification + '&customerName =' + customer.name;
+        window.open(url, "_blank");
+    };
+
+    $scope.getTransaction = function(customer) {
+        var url = '/transaction/load?customerId =' + customer.identification + '&customerName =' + customer.name;
+        window.open(url, "_blank");
     };
 });

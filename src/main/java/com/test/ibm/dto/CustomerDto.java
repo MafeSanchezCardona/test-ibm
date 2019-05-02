@@ -10,7 +10,16 @@ public class CustomerDto implements Serializable {
     private String name;
     private String address;
     private String city;
-    private Integer telephone;
+    private Long telephone;
+    private String cardNumbers;
+
+    public String getCardNumbers() {
+        return cardNumbers;
+    }
+
+    public void setCardNumbers(String cardNumbers) {
+        this.cardNumbers = cardNumbers;
+    }
 
     public Long getIdentification() {
         return identification;
@@ -44,11 +53,11 @@ public class CustomerDto implements Serializable {
         this.city = city;
     }
 
-    public Integer getTelephone() {
+    public Long getTelephone() {
         return telephone;
     }
 
-    public void setTelephone(Integer telephone) {
+    public void setTelephone(Long telephone) {
         this.telephone = telephone;
     }
 }

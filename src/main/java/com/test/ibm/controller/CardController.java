@@ -3,6 +3,8 @@ package com.test.ibm.controller;
 import com.test.ibm.dto.CardDto;
 import com.test.ibm.service.CardService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,23 +19,31 @@ public class CardController {
     @Autowired
     private CardService cardService;
 
+    @RequestMapping("/load")
+    public String load() {
+        return "card";
+    }
+
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public void save(@RequestBody CardDto cardDto) {
+    public ResponseEntity<String> save(@RequestBody CardDto cardDto) {
         cardService.save(cardDto);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public void update(@RequestBody CardDto cardDto) {
+    public ResponseEntity<String> update(@RequestBody CardDto cardDto) {
         cardService.update(cardDto);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
-    public void delete(@RequestBody CardDto cardDto) {
+    public ResponseEntity<String> delete(@RequestBody CardDto cardDto) {
         cardService.delete(cardDto);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @RequestMapping(value = "/list")
-    public List<CardDto> list() {
-        return cardService.list();
+    public ResponseEntity<List<CardDto>> list(@RequestBody Long customerIdentification) {
+        return new ResponseEntity<>(cardService.list(customerIdentification), HttpStatus.OK);
     }
 }

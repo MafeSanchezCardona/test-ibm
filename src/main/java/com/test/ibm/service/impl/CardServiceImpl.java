@@ -26,8 +26,8 @@ public class CardServiceImpl implements CardService {
     }
 
     @Override
-    public List<CardDto> list() {
-        return CardConverter.entityToDto(cardRepository.list());
+    public List<CardDto> list(Long customerIdentification) {
+        return CardConverter.entityToDto(cardRepository.list(customerIdentification));
     }
 
     @Override

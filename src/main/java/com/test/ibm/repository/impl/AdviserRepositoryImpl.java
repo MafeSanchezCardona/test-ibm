@@ -26,7 +26,9 @@ public class AdviserRepositoryImpl implements AdviserRepository {
         Session session = HibernateUtility.getSessionFactory().openSession();
         session.beginTransaction();
 
-        session.delete(adviser);
+        StringBuilder deleteQuery = new StringBuilder("DELETE FROM Adviser WHERE IDENTIFICATION = ").append(adviser.getIdentification());
+
+        session.createQuery(deleteQuery.toString()).executeUpdate();
 
         session.getTransaction().commit();
         HibernateUtility.shutdown();

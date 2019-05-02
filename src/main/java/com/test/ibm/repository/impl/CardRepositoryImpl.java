@@ -5,7 +5,6 @@ import com.test.ibm.repository.CardRepository;
 import com.test.ibm.utility.HibernateUtility;
 import org.hibernate.Session;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -27,18 +26,22 @@ public class CardRepositoryImpl implements CardRepository {
         Session session = HibernateUtility.getSessionFactory().openSession();
         session.beginTransaction();
 
-        session.delete(card);
+        StringBuilder deleteQuery = new StringBuilder("DELETE FROM Card WHERE NUMBER = ").append(card.getNumber());
+
+        session.createQuery(deleteQuery.toString()).executeUpdate();
 
         session.getTransaction().commit();
         HibernateUtility.shutdown();
     }
 
     @Override
-    public List<Card> list() {
+    public List<Card> list(Long customerIdentification) {
         Session session = HibernateUtility.getSessionFactory().openSession();
         session.beginTransaction();
 
-        List<Card> cardList = session.createQuery("from Card").list();
+        StringBuilder selectQuery = new StringBuilder("FROM Card WHERE CUSTOMER_IDENTIFICATION = ").append(customerIdentification);
+
+        List<Card> cardList = session.createQuery(selectQuery.toString()).list();
 
         session.getTransaction().commit();
         HibernateUtility.shutdown();

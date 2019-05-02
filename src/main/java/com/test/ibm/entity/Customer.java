@@ -1,5 +1,7 @@
 package com.test.ibm.entity;
 
+import jdk.nashorn.internal.ir.annotations.Ignore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -8,7 +10,7 @@ import java.io.Serializable;
 public class Customer implements Serializable {
 
     @Id
-    @Column(name = "IDENTIFICATION", unique = true, nullable = false, length = 100)
+    @Column(name = "IDENTIFICATION", unique = true, nullable = false, length = 50)
     private Long identification;
     @Column(name = "NAME", nullable = false, length = 50)
     private String name;
@@ -17,7 +19,17 @@ public class Customer implements Serializable {
     @Column(name = "CITY", nullable = false, length = 30)
     private String city;
     @Column(name = "TELEPHONE", nullable = false, length = 20)
-    private Integer telephone;
+    private Long telephone;
+    @Ignore
+    private String cardNumbers;
+
+    public String getCardNumbers() {
+        return cardNumbers;
+    }
+
+    public void setCardNumbers(String cardNumbers) {
+        this.cardNumbers = cardNumbers;
+    }
 
     public Long getIdentification() {
         return identification;
@@ -51,11 +63,11 @@ public class Customer implements Serializable {
         this.city = city;
     }
 
-    public Integer getTelephone() {
+    public Long getTelephone() {
         return telephone;
     }
 
-    public void setTelephone(Integer telephone) {
+    public void setTelephone(Long telephone) {
         this.telephone = telephone;
     }
 }

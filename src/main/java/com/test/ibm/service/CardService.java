@@ -10,7 +10,7 @@ public interface CardService {
 
     void delete(CardDto cardDto);
 
-    List<CardDto> list();
+    List<CardDto> list(Long customerIdentification);
 
     void update(CardDto cardDto);
 }

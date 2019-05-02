@@ -10,7 +10,7 @@ public interface CardRepository {
 
     void delete(Card card);
 
-    List<Card> list();
+    List<Card> list(Long customerIdentification);
 
     void update(Card card);
 }

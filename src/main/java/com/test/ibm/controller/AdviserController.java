@@ -3,6 +3,8 @@ package com.test.ibm.controller;
 import com.test.ibm.dto.AdviserDto;
 import com.test.ibm.service.AdviserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,22 +24,25 @@ public class AdviserController {
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public void save(@RequestBody AdviserDto adviserDto) {
+    public ResponseEntity<String> save(@RequestBody AdviserDto adviserDto) {
         adviserService.save(adviserDto);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public void update(@RequestBody AdviserDto adviserDto) {
+    public ResponseEntity<String> update(@RequestBody AdviserDto adviserDto) {
         adviserService.update(adviserDto);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
-    public void delete(@RequestBody AdviserDto adviserDto) {
+    public ResponseEntity<String> delete(@RequestBody AdviserDto adviserDto) {
         adviserService.delete(adviserDto);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @RequestMapping(value = "/list")
-    public List<AdviserDto> list() {
-        return adviserService.list();
+    public ResponseEntity<List<AdviserDto>> list() {
+        return new ResponseEntity<>(adviserService.list(), HttpStatus.OK);
     }
 }

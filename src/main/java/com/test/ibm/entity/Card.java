@@ -9,7 +9,7 @@ public class Card implements Serializable {
 
     @Id
     @Column(name = "NUMBER", unique = true, nullable = false, length = 16)
-    private Integer number;
+    private Long number;
     @Column(name = "CCV", nullable = false, length = 4)
     private Integer ccv;
     @Column(name = "TYPE", nullable = false, length = 50)
@@ -25,11 +25,11 @@ public class Card implements Serializable {
         this.customerIdentification = customerIdentification;
     }
 
-    public Integer getNumber() {
+    public Long getNumber() {
         return number;
     }
 
-    public void setNumber(Integer number) {
+    public void setNumber(Long number) {
         this.number = number;
     }
 

@@ -3,9 +3,10 @@ package com.test.ibm.repository.impl;
 import com.test.ibm.entity.Customer;
 import com.test.ibm.repository.CustomerRepository;
 import com.test.ibm.utility.HibernateUtility;
+import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -28,7 +29,9 @@ public class CustomerRepositoryImpl implements CustomerRepository {
         Session session = HibernateUtility.getSessionFactory().openSession();
         session.beginTransaction();
 
-        session.delete(customer);
+        StringBuilder deleteQuery = new StringBuilder("DELETE FROM Customer WHERE IDENTIFICATION = ").append(customer.getIdentification());
+
+        session.createQuery(deleteQuery.toString()).executeUpdate();
 
         session.getTransaction().commit();
         HibernateUtility.shutdown();
@@ -40,7 +43,18 @@ public class CustomerRepositoryImpl implements CustomerRepository {
         Session session = HibernateUtility.getSessionFactory().openSession();
         session.beginTransaction();
 
-        List<Customer> customerList = session.createQuery("from Customer").list();
+        StringBuilder selectQuery = new StringBuilder("SELECT ")
+                .append("Customer.IDENTIFICATION AS identification,")
+                .append("Customer.NAME AS name,")
+                .append("Customer.ADDRESS AS address,")
+                .append("Customer.CITY AS city,")
+                .append("Customer.TELEPHONE AS telephone,")
+                .append("(SELECT GROUP_CONCAT(Card.NUMBER) FROM Card WHERE Card.CUSTOMER_IDENTIFICATION = Customer.IDENTIFICATION) AS cardNumbers ")
+                .append("FROM Customer ");
+
+        SQLQuery query = session.createSQLQuery(selectQuery.toString());
+        query.addEntity(Customer.class);
+        List<Customer> customerList = query.list();
 
         session.getTransaction().commit();
         HibernateUtility.shutdown();
