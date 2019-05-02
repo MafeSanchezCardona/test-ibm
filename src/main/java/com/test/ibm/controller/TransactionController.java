@@ -68,22 +68,33 @@ public class TransactionController {
     /**
      * Method for get all transactions
      * @return ResponseEntity<List<TransactionDto>>
-     * @throws ParseException
      */
     @RequestMapping(value = "/list")
-    public ResponseEntity<List<TransactionDto>> list() throws ParseException {
-        return new ResponseEntity<>(transactionService.list(), HttpStatus.OK);
+    public ResponseEntity<List<TransactionDto>> list() {
+
+        try {
+            return new ResponseEntity<>(transactionService.list(), HttpStatus.OK);
+
+        } catch (ParseException ex) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     /**
      * Method for get all transactions by customer
      * @param customerIdentification
      * @return ResponseEntity<List<TransactionDto>>
-     * @throws ParseException
      */
     @RequestMapping(value = "/list-by-customer")
-    public ResponseEntity<List<TransactionDto>> list(@RequestBody Long customerIdentification ) throws ParseException {
-        return new ResponseEntity<>(transactionService.listByCustomer(customerIdentification), HttpStatus.OK);
+    public ResponseEntity<List<TransactionDto>> list(@RequestBody Long customerIdentification ) {
+        try {
+
+            return new ResponseEntity<>(transactionService.listByCustomer(customerIdentification), HttpStatus.OK);
+
+        } catch (ParseException ex) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
     }
 
 }
