@@ -19,13 +19,13 @@ public class Transaction implements Serializable {
     @Column(name = "AMOUNT", nullable = false, length = 12)
     private Double amount;
     @Column(name = "CARD_NUMBER", nullable = false, length = 16)
-    private Integer cardNumber;
+    private Long cardNumber;
 
-    public Integer getCardNumber() {
+    public Long getCardNumber() {
         return cardNumber;
     }
 
-    public void setCardNumber(Integer cardNumber) {
+    public void setCardNumber(Long cardNumber) {
         this.cardNumber = cardNumber;
     }
 

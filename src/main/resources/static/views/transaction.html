@@ -4,20 +4,33 @@
     <meta charset="UTF-8">
     <title>Test IBM</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type = "text/css" href="../css/app.css">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.7/angular.js"></script>
 </head>
 <body>
 <div class="container" ng-app="transactionModule" ng-controller="transaction">
-    <div class="row" style="margin-top: 30px;">
+    <div class="row margin-top-30">
         <h5>Consumos del Cliente: &nbsp;</h5>
         <label>{{customerName}}</label>
     </div>
+
     <div class="row">
         <div class="input-group mb-3">
-            <input type="text" class="form-control" maxlength="4" ng-model="transactionDto.ccv" placeholder="CCV" aria-label="CCV" aria-describedby="button-addon2" required>
+            <input type="date" class="form-control" ng-model="date.value" placeholder="Fecha" aria-label="Fecha" aria-describedby="button-addon2" required>
         </div>
         <div class="input-group mb-3">
-            <input type="text" class="form-control" maxlength="50" ng-model="transactionDto.type" placeholder="Tipo de Tarjeta" aria-label="Tipo de Tarjeta" aria-describedby="button-addon2" required>
+            <input type="text" class="form-control" maxlength="50" ng-model="transactionDto.description" placeholder="Descripción" aria-label="Descripción" aria-describedby="button-addon2" required>
+        </div>
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" maxlength="50" ng-model="transactionDto.amount" placeholder="Monto" aria-label="Monto" aria-describedby="button-addon2" required>
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <label class="input-group-text" for="select-card">Número de Tarjeta</label>
+            </div>
+            <select class="custom-select" id="select-card" ng-model="selectedCardNumber">
+                <option ng-repeat="cardByCustomer in allCardByCustomer" value="{{cardByCustomer.number}}">{{cardByCustomer.number}}</option>
+            </select>
         </div>
         <div class="input-group mb-3">
             <button ng-click="save()" class="btn btn-sm btn-info">Guardar Consumo</button>
@@ -28,21 +41,25 @@
         <table class="table table-hover">
             <thead>
             <tr>
+                <th scope="col">#</th>
+                <th scope="col">Fecha</th>
+                <th scope="col">Descripción</th>
+                <th scope="col">Monto</th>
                 <th scope="col">Número de Tarjeta</th>
-                <th scope="col">CCV</th>
-                <th scope="col">Tipo de Tarjeta</th>
                 <th scope="col">Opciones</th>
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="card in allCard">
-                <th scope="row">{{card.number}}</th>
-                <td>{{card.ccv}}</td>
-                <td>{{card.type}}</td>
+            <tr ng-repeat="transaction in allTransaction">
+                <th scope="row">{{transaction.id}}</th>
+                <td>{{transaction.date}}}</td>
+                <td>{{transaction.description}}</td>
+                <td>{{transaction.amount}}</td>
+                <td>{{transaction.cardNumber}}</td>
                 <td>
                     <div class="input-group mb-3">
-                        <button ng-click="edit(card)" class="btn btn-sm btn-info">Editar</button>&nbsp;&nbsp;
-                        <button ng-click="delete(card)" class="btn btn-sm btn-info">Eliminar</button>
+                        <button ng-click="edit(transaction)" class="btn btn-sm btn-info">Editar</button>&nbsp;&nbsp;
+                        <button ng-click="delete(transaction)" class="btn btn-sm btn-info">Eliminar</button>
                     </div>
                 </td>
             </tr>

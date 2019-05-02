@@ -2,6 +2,7 @@ package com.test.ibm.service;
 
 import com.test.ibm.dto.TransactionDto;
 
+import java.text.ParseException;
 import java.util.List;
 
 public interface TransactionService {
@@ -10,9 +11,9 @@ public interface TransactionService {
 
     void delete(TransactionDto transactionDto);
 
-    List<TransactionDto> list();
+    List<TransactionDto> list() throws ParseException;
 
     void update(TransactionDto transactionDto);
 
-    List<TransactionDto> listByCustomer(Long customerIdentification);
+    List<TransactionDto> listByCustomer(Long customerIdentification) throws ParseException;
 }

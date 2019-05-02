@@ -3,6 +3,7 @@ package com.test.ibm.repository.impl;
 import com.test.ibm.entity.Transaction;
 import com.test.ibm.repository.TransactionRepository;
 import com.test.ibm.utility.HibernateUtility;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
@@ -63,11 +64,19 @@ public class TransactionRepositoryImpl implements TransactionRepository {
         session.beginTransaction();
 
         StringBuilder selectQuery = new StringBuilder();
-        selectQuery.append("FROM Transaction transaction ")
-                   .append("INNER JOIN Card card ON card.number = transaction.cardNumber ")
-                   .append(" AND card.identificationCustomer = ").append(customerIdentification);
+        selectQuery.append("SELECT transaction.ID AS id, ")
+                .append("transaction.ID AS id, ")
+                .append("transaction.DATE AS date,  ")
+                .append("transaction.DESCRIPTION AS description, ")
+                .append("transaction.AMOUNT AS amount, ")
+                .append("transaction.CARD_NUMBER AS cardNumber ")
+                .append("FROM Transaction transaction ")
+                .append(" INNER JOIN Card card ON card.NUMBER = transaction.CARD_NUMBER ")
+                .append(" AND card.CUSTOMER_IDENTIFICATION = ").append(customerIdentification);
 
-        List<Transaction> transactionList = session.createQuery(selectQuery.toString()).list();
+        SQLQuery query = session.createSQLQuery(selectQuery.toString());
+        query.addEntity(Transaction.class);
+        List<Transaction> transactionList = query.list();
 
         session.getTransaction().commit();
         HibernateUtility.shutdown();

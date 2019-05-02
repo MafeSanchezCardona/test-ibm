@@ -7,6 +7,7 @@ import com.test.ibm.service.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
 import java.util.List;
 
 @Service
@@ -26,7 +27,7 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
-    public List<TransactionDto> list() {
+    public List<TransactionDto> list() throws ParseException {
         return TransactionConverter.entityToDto(transactionRepository.list());
     }
 
@@ -36,7 +37,7 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
-    public List<TransactionDto> listByCustomer(Long customerIdentification) {
+    public List<TransactionDto> listByCustomer(Long customerIdentification) throws ParseException {
         return TransactionConverter.entityToDto(transactionRepository.listByCustomer(customerIdentification));
     }
 }

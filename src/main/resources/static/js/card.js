@@ -55,9 +55,9 @@ app.controller("card", function($scope, $http) {
             method: "POST",
             url: '/card/delete',
             data: {
-                number: $scope.cardDto.number,
-                ccv: $scope.cardDto.ccv,
-                type: $scope.cardDto.type,
+                number: card.number,
+                ccv: card.ccv,
+                type: $card.type,
                 customerIdentification: $scope.customerId
             },
             headers: {

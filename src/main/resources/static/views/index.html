@@ -4,11 +4,12 @@
     <meta charset="UTF-8">
     <title>Test IBM</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type = "text/css" href="../css/app.css">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.7/angular.js"></script>
 </head>
 <body>
     <div class="container" ng-app="customerModule" ng-controller="customer">
-        <div id="menu" style="margin: 30px;">
+        <div id="menu" class="margin-top-30">
             <ul class="nav nav-pills nav-fill">
                 <li class="nav-item">
                     <a class="nav-link active" href="#">Lista de Clientes</a>
@@ -18,7 +19,7 @@
                 </li>
             </ul>
         </div>
-        <div class="row">
+        <div class="row margin-top-30">
             <div class="input-group mb-3">
                 <input type="text" class="form-control" maxlength="50" ng-model="customerDto.identification" placeholder="Cédula" aria-label="Cédula" aria-describedby="button-addon2" required>
             </div>
@@ -53,18 +54,18 @@
                 </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="customer in allCustomer" ng-click="getTransaction(customer)">
-                        <th scope="row">{{customer.identification}}</th>
-                        <td>{{customer.name}}</td>
-                        <td>{{customer.address}}</td>
-                        <td>{{customer.city}}</td>
-                        <td>{{customer.telephone}}</td>
-                        <td>{{customer.cardNumbers}}</td>
+                    <tr ng-repeat="customer in allCustomer">
+                        <th scope="row" ng-click="getTransaction(customer)">{{customer.identification}}</th>
+                        <td ng-click="getTransaction(customer)">{{customer.name}}</td>
+                        <td ng-click="getTransaction(customer)">{{customer.address}}</td>
+                        <td ng-click="getTransaction(customer)">{{customer.city}}</td>
+                        <td ng-click="getTransaction(customer)">{{customer.telephone}}</td>
+                        <td ng-click="getTransaction(customer)">{{customer.cardNumbers}}</td>
                         <td>
                             <div class="input-group mb-3">
                                 <button ng-click="edit(customer)" class="btn btn-sm btn-info">Editar</button>&nbsp;&nbsp;
                                 <button ng-click="delete(customer)" class="btn btn-sm btn-info">Eliminar</button>&nbsp;&nbsp;
-                                <button ng-click="getCards(customer)" style="margin-top: 7px;" type="button" class="btn btn-sm btn-info" data-toggle="modal" data-target="#cardModal">Tarjetas</button>
+                                <button ng-click="getCards(customer)" type="button" class="btn btn-sm btn-info margin-top-7" data-toggle="modal" data-target="#cardModal">Tarjetas</button>
                             </div>
                         </td>
                     </tr>

@@ -3,7 +3,10 @@ package com.test.ibm.converter;
 import com.test.ibm.dto.TransactionDto;
 import com.test.ibm.entity.Transaction;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class TransactionConverter {
@@ -19,7 +22,7 @@ public class TransactionConverter {
         return transaction;
     }
 
-    public static List<TransactionDto> entityToDto(List<Transaction> transactionList) {
+    public static List<TransactionDto> entityToDto(List<Transaction> transactionList) throws ParseException {
 
         List<TransactionDto> transactionDtoList = new ArrayList<>();
         TransactionDto transactionDto;
@@ -28,9 +31,13 @@ public class TransactionConverter {
             transactionDto.setId(transaction.getId());
             transactionDto.setCardNumber(transaction.getCardNumber());
             transactionDto.setDescription(transaction.getDescription());
-            transactionDto.setDate(transaction.getDate());
             transactionDto.setAmount(transaction.getAmount());
             transactionDtoList.add(transactionDto);
+
+            SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+            String dateFrom = formatter.format(transaction.getDate());
+
+            transactionDto.setDate(formatter.parse(dateFrom));
         }
 
         return transactionDtoList;

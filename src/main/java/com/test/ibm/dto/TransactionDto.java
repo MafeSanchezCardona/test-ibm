@@ -8,7 +8,7 @@ public class TransactionDto {
     private Date date;
     private String description;
     private Double amount;
-    private Integer cardNumber;
+    private Long cardNumber;
 
     public Long getId() {
         return id;
@@ -42,11 +42,11 @@ public class TransactionDto {
         this.amount = amount;
     }
 
-    public Integer getCardNumber() {
+    public Long getCardNumber() {
         return cardNumber;
     }
 
-    public void setCardNumber(Integer cardNumber) {
+    public void setCardNumber(Long cardNumber) {
         this.cardNumber = cardNumber;
     }
 }

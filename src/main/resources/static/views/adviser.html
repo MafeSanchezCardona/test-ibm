@@ -4,12 +4,13 @@
     <meta charset="UTF-8">
     <title>Test IBM</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type = "text/css" href="../css/app.css">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.7/angular.js"></script>
 </head>
 <body>
 <div class="container" ng-app="AdviserModule" ng-controller="adviser">
 
-    <div id="menu" style="margin: 30px;">
+    <div id="menu" class="margin-top-30">
         <ul class="nav nav-pills nav-fill">
             <li class="nav-item">
                 <a class="nav-link" href="/">Lista de Clientes</a>
@@ -19,7 +20,7 @@
             </li>
         </ul>
     </div>
-    <div class="row">
+    <div class="row margin-top-30">
         <div class="input-group mb-3">
             <input type="text" class="form-control" maxlength="50" ng-model="adviserDto.identification" placeholder="Cédula" aria-label="Cédula" aria-describedby="button-addon2" required>
         </div>
