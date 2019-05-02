@@ -5,9 +5,14 @@ import jdk.nashorn.internal.ir.annotations.Ignore;
 import javax.persistence.*;
 import java.io.Serializable;
 
+/**
+ * Class of the entity Customer
+ */
 @Entity
 @Table(name = "Customer", uniqueConstraints = {@UniqueConstraint(columnNames = "IDENTIFICATION")})
 public class Customer implements Serializable {
+
+    private static final long serialVersionUID = 1664919855617808226L;
 
     @Id
     @Column(name = "IDENTIFICATION", unique = true, nullable = false, length = 50)

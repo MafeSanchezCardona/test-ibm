@@ -6,12 +6,12 @@ import com.test.ibm.utility.HibernateUtility;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Component
 public class TransactionRepositoryImpl implements TransactionRepository {
+
     @Override
     public void save(Transaction transaction) {
         Session session = HibernateUtility.getSessionFactory().openSession();
@@ -20,7 +20,6 @@ public class TransactionRepositoryImpl implements TransactionRepository {
         session.save(transaction);
 
         session.getTransaction().commit();
-        HibernateUtility.shutdown();
     }
 
     @Override
@@ -31,7 +30,6 @@ public class TransactionRepositoryImpl implements TransactionRepository {
         session.delete(transaction);
 
         session.getTransaction().commit();
-        HibernateUtility.shutdown();
     }
 
     @Override
@@ -42,7 +40,6 @@ public class TransactionRepositoryImpl implements TransactionRepository {
         List<Transaction> transactionList = session.createQuery("from Transaction").list();
 
         session.getTransaction().commit();
-        HibernateUtility.shutdown();
 
         return transactionList;
     }
@@ -55,7 +52,6 @@ public class TransactionRepositoryImpl implements TransactionRepository {
         session.update(transaction);
 
         session.getTransaction().commit();
-        HibernateUtility.shutdown();
     }
 
     @Override
@@ -79,7 +75,6 @@ public class TransactionRepositoryImpl implements TransactionRepository {
         List<Transaction> transactionList = query.list();
 
         session.getTransaction().commit();
-        HibernateUtility.shutdown();
 
         return transactionList;
     }

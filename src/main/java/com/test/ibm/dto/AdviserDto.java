@@ -1,6 +1,13 @@
 package com.test.ibm.dto;
 
-public class AdviserDto {
+import java.io.Serializable;
+
+/**
+ * DTO of the object Adviser
+ */
+public class AdviserDto implements Serializable {
+
+    private static final long serialVersionUID = -3547433431765374606L;
 
     private Long identification;
     private String name;

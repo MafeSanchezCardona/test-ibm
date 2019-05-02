@@ -3,9 +3,14 @@ package com.test.ibm.entity;
 import javax.persistence.*;
 import java.io.Serializable;
 
+/**
+ * Class of the entity Adviser
+ */
 @Entity
 @Table(name = "Adviser", uniqueConstraints = {@UniqueConstraint(columnNames = "IDENTIFICATION")})
 public class Adviser implements Serializable {
+
+    private static final long serialVersionUID = 2790503174430845650L;
 
     @Id
     @Column(name = "IDENTIFICATION", unique = true, nullable = false, length = 100)

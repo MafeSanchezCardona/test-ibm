@@ -6,10 +6,17 @@ import com.test.ibm.entity.Card;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class that helps convert DTO to Entity or vice versa
+ */
 public class CardConverter {
 
+    /**
+     * Method that convert DTO to Entity
+     * @param cardDto
+     * @return
+     */
     public static Card dtoToEntity(CardDto cardDto) {
-
         Card card = new Card();
         card.setNumber(cardDto.getNumber());
         card.setCcv(cardDto.getCcv());
@@ -18,8 +25,12 @@ public class CardConverter {
         return card;
     }
 
+    /**
+     * Method that convert Entity List to DTO List
+     * @param cardList
+     * @return
+     */
     public static List<CardDto> entityToDto(List<Card> cardList) {
-
         List<CardDto> cardDtoList = new ArrayList<>();
         CardDto cardDto;
         for (Card card : cardList) {

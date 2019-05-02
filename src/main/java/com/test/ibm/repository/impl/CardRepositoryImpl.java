@@ -10,6 +10,7 @@ import java.util.List;
 
 @Component
 public class CardRepositoryImpl implements CardRepository {
+
     @Override
     public void save(Card card) {
         Session session = HibernateUtility.getSessionFactory().openSession();
@@ -18,7 +19,6 @@ public class CardRepositoryImpl implements CardRepository {
         session.save(card);
 
         session.getTransaction().commit();
-        HibernateUtility.shutdown();
     }
 
     @Override
@@ -31,7 +31,6 @@ public class CardRepositoryImpl implements CardRepository {
         session.createQuery(deleteQuery.toString()).executeUpdate();
 
         session.getTransaction().commit();
-        HibernateUtility.shutdown();
     }
 
     @Override
@@ -44,7 +43,6 @@ public class CardRepositoryImpl implements CardRepository {
         List<Card> cardList = session.createQuery(selectQuery.toString()).list();
 
         session.getTransaction().commit();
-        HibernateUtility.shutdown();
 
         return cardList;
     }
@@ -57,6 +55,5 @@ public class CardRepositoryImpl implements CardRepository {
         session.update(card);
 
         session.getTransaction().commit();
-        HibernateUtility.shutdown();
     }
 }

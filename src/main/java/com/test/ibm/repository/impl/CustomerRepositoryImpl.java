@@ -3,7 +3,6 @@ package com.test.ibm.repository.impl;
 import com.test.ibm.entity.Customer;
 import com.test.ibm.repository.CustomerRepository;
 import com.test.ibm.utility.HibernateUtility;
-import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.springframework.stereotype.Component;
@@ -21,7 +20,6 @@ public class CustomerRepositoryImpl implements CustomerRepository {
         session.save(customer);
 
         session.getTransaction().commit();
-        HibernateUtility.shutdown();
     }
 
     @Override
@@ -34,7 +32,6 @@ public class CustomerRepositoryImpl implements CustomerRepository {
         session.createQuery(deleteQuery.toString()).executeUpdate();
 
         session.getTransaction().commit();
-        HibernateUtility.shutdown();
     }
 
     @Override
@@ -57,7 +54,6 @@ public class CustomerRepositoryImpl implements CustomerRepository {
         List<Customer> customerList = query.list();
 
         session.getTransaction().commit();
-        HibernateUtility.shutdown();
 
         return customerList;
     }
@@ -70,6 +66,5 @@ public class CustomerRepositoryImpl implements CustomerRepository {
         session.update(customer);
 
         session.getTransaction().commit();
-        HibernateUtility.shutdown();
     }
 }

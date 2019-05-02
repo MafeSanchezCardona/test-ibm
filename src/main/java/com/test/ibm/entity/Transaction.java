@@ -4,9 +4,14 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
+/**
+ * Class of the entity Transaction
+ */
 @Entity
 @Table(name = "Transaction", uniqueConstraints = {@UniqueConstraint(columnNames = "ID")})
 public class Transaction implements Serializable {
+
+    private static final long serialVersionUID = -6856660853673590553L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,8 +1,14 @@
 package com.test.ibm.dto;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class TransactionDto {
+/**
+ * DTO of the object Transaction
+ */
+public class TransactionDto implements Serializable {
+
+    private static final long serialVersionUID = -1870879592639401742L;
 
     private Long id;
     private Date date;

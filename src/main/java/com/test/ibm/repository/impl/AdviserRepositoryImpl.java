@@ -10,6 +10,7 @@ import java.util.List;
 
 @Component
 public class AdviserRepositoryImpl implements AdviserRepository {
+
     @Override
     public void save(Adviser adviser) {
         Session session = HibernateUtility.getSessionFactory().openSession();
@@ -18,7 +19,6 @@ public class AdviserRepositoryImpl implements AdviserRepository {
         session.save(adviser);
 
         session.getTransaction().commit();
-        HibernateUtility.shutdown();
     }
 
     @Override
@@ -31,7 +31,6 @@ public class AdviserRepositoryImpl implements AdviserRepository {
         session.createQuery(deleteQuery.toString()).executeUpdate();
 
         session.getTransaction().commit();
-        HibernateUtility.shutdown();
     }
 
     @Override
@@ -42,7 +41,6 @@ public class AdviserRepositoryImpl implements AdviserRepository {
         List<Adviser> adviserList = session.createQuery("from Adviser").list();
 
         session.getTransaction().commit();
-        HibernateUtility.shutdown();
 
         return adviserList;
     }
@@ -55,6 +53,5 @@ public class AdviserRepositoryImpl implements AdviserRepository {
         session.update(adviser);
 
         session.getTransaction().commit();
-        HibernateUtility.shutdown();
     }
 }

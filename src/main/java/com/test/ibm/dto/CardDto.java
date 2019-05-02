@@ -1,6 +1,13 @@
 package com.test.ibm.dto;
 
-public class CardDto {
+import java.io.Serializable;
+
+/**
+ * DTO of the object Card
+ */
+public class CardDto implements Serializable {
+
+    private static final long serialVersionUID = 5003896829521788978L;
 
     private Long number;
     private Integer ccv;
