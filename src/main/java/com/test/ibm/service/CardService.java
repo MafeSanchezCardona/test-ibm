@@ -33,4 +33,10 @@ public interface CardService {
      * @param cardDto
      */
     void update(CardDto cardDto);
+
+    /**
+     * Method for to search if there is a card
+     * @param number
+     */
+    boolean existsCardNumber(Long number);
 }

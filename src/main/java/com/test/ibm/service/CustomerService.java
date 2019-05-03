@@ -32,4 +32,11 @@ public interface CustomerService {
      * @param customerDto
      */
     void update(CustomerDto customerDto);
+
+    /**
+     * Method for to search if there is a customer
+     * @param identification
+     * @return
+     */
+    boolean existsCustomer(Long identification);
 }

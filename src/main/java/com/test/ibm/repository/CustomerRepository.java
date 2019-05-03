@@ -32,4 +32,11 @@ public interface CustomerRepository {
      * @param customer
      */
     void update(Customer customer);
+
+    /**
+     * Method for to search if there is a customer
+     * @param identification
+     * @return
+     */
+    boolean existsCustomer(Long identification);
 }

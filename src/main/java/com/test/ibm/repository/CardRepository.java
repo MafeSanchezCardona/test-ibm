@@ -33,4 +33,10 @@ public interface CardRepository {
      * @param card
      */
     void update(Card card);
+
+    /**
+     * Method for to search if there is a card
+     * @param number
+     */
+    boolean existsCardNumber(Long number);
 }

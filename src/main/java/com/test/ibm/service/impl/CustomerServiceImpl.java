@@ -34,4 +34,9 @@ public class CustomerServiceImpl implements CustomerService {
     public void update(CustomerDto customerDto) {
         customerRepository.update(CustomerConverter.dtoToEntity(customerDto));
     }
+
+    @Override
+    public boolean existsCustomer(Long identification) {
+        return customerRepository.existsCustomer(identification);
+    }
 }

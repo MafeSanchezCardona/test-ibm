@@ -16,14 +16,12 @@ repositories {
 }
 
 dependencies {
-	//implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-
 	compile 'org.springframework.boot:spring-boot-starter-web'
 	compile 'org.springframework.boot:spring-boot-starter-data-rest'
 
-	//compile 'org.springframework:spring-webmvc:4.1.6.RELEASE'
 	compile group: 'org.springframework.boot', name: 'spring-boot-autoconfigure', version: '2.1.4.RELEASE'
 	compile group: 'org.springframework.boot', name: 'spring-boot-starter-actuator'
+	compile group: 'commons-lang', name: 'commons-lang', version: '2.6'
 	compile 'org.hsqldb:hsqldb:2.4.1'
 	compile group: 'com.mchange', name: 'c3p0', version: '0.9.2.1'
 	compile group: 'org.hibernate', name: 'hibernate-c3p0', version: '5.4.2.Final'
@@ -31,8 +29,8 @@ dependencies {
 	compile 'org.slf4j:slf4j-simple:1.7.7'
 	compile 'org.javassist:javassist:3.15.0-GA'
 	compile 'mysql:mysql-connector-java:5.1.31'
-
-	//providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
+	
+	compile group: 'org.assertj', name: 'assertj-core', version: '3.12.2'
 	
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	

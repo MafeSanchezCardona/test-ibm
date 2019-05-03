@@ -3,6 +3,8 @@ package com.test.ibm.repository.impl;
 import com.test.ibm.entity.Card;
 import com.test.ibm.repository.CardRepository;
 import com.test.ibm.utility.HibernateUtility;
+import org.apache.commons.lang.BooleanUtils;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.springframework.stereotype.Component;
 
@@ -56,4 +58,20 @@ public class CardRepositoryImpl implements CardRepository {
 
         session.getTransaction().commit();
     }
+
+    @Override
+    public boolean existsCardNumber(Long number) {
+        Session session = HibernateUtility.getSessionFactory().openSession();
+        session.beginTransaction();
+
+        StringBuilder selectQuery = new StringBuilder();
+        selectQuery.append("FROM Card WHERE NUMBER = ").append(number);
+
+        Card card = (Card) session.createQuery(selectQuery.toString()).uniqueResult();
+
+        session.getTransaction().commit();
+
+        return BooleanUtils.toBoolean(card != null);
+    }
+
 }

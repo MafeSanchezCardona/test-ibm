@@ -3,6 +3,7 @@ package com.test.ibm.repository.impl;
 import com.test.ibm.entity.Customer;
 import com.test.ibm.repository.CustomerRepository;
 import com.test.ibm.utility.HibernateUtility;
+import org.apache.commons.lang.BooleanUtils;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.springframework.stereotype.Component;
@@ -66,5 +67,20 @@ public class CustomerRepositoryImpl implements CustomerRepository {
         session.update(customer);
 
         session.getTransaction().commit();
+    }
+
+    @Override
+    public boolean existsCustomer(Long identification) {
+        Session session = HibernateUtility.getSessionFactory().openSession();
+        session.beginTransaction();
+
+        StringBuilder selectQuery = new StringBuilder();
+        selectQuery.append("FROM Customer WHERE IDENTIFICATION = ").append(identification);
+
+        Customer customer = (Customer) session.createQuery(selectQuery.toString()).uniqueResult();
+
+        session.getTransaction().commit();
+
+        return BooleanUtils.toBoolean(customer != null);
     }
 }
