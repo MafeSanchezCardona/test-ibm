@@ -21,3 +21,5 @@ Para este caso hay dos opciones:
 * Comando para descargar la imagen: docker pull mafesanchezcardona/test-ibm
 * Comando para ejecutarla localmente: docker run -d  -p 80:80 mafesanchezcardona/test-ibm:latest
 
+Página con imagen en Dockerhub: https://hub.docker.com/r/mafesanchezcardona/test-ibm
+
